@@ -1,0 +1,135 @@
+<!doctype html>
+<html lang="fr">
+    <head>
+        <meta charset="UTF-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+        <meta
+            name="description"
+            content="PaletteProof — extraction de couleurs dominantes, génération de palette claire/sombre et vérification d'accessibilité WCAG."
+        />
+        <title>PaletteProof | BS3 Digital</title>
+        <link rel="stylesheet" href="styles.css" />
+    </head>
+    <body>
+        <header class="site-header">
+            <div class="container">
+                <p class="eyebrow">BS3 Digital</p>
+                <h1>PaletteProof</h1>
+                <p class="subtitle">
+                    Analysez une image, générez une palette exploitable et
+                    vérifiez le contraste WCAG.
+                </p>
+            </div>
+        </header>
+
+        <main class="container">
+            <section class="card upload-card" aria-labelledby="upload-title">
+                <h2 id="upload-title">Importer une image</h2>
+
+                <div
+                    id="dropzone"
+                    class="dropzone"
+                    tabindex="0"
+                    role="button"
+                    aria-label="Importer une image depuis votre ordinateur"
+                >
+                    <p>
+                        <strong>Cliquez ou déposez</strong> un logo, une capture
+                        d’écran ou une image.
+                    </p>
+                    <span>Formats recommandés : PNG, JPG, WebP</span>
+                </div>
+
+                <input type="file" id="fileInput" accept="image/*" hidden />
+
+                <div class="preview-wrap" id="previewWrap" hidden>
+                    <img id="preview" alt="Aperçu de l’image importée" />
+                </div>
+            </section>
+
+            <section id="results" hidden>
+                <section class="card" aria-labelledby="dominant-title">
+                    <h2 id="dominant-title">Couleurs dominantes</h2>
+                    <div id="dominantPalette" class="palette-grid"></div>
+                </section>
+
+                <section class="card" aria-labelledby="theme-title">
+                    <h2 id="theme-title">Palette claire / sombre</h2>
+                    <div id="themePalette" class="theme-groups"></div>
+                </section>
+
+                <section class="card" aria-labelledby="contrast-title">
+                    <h2 id="contrast-title">Vérification du contraste</h2>
+
+                    <div class="contrast-controls">
+                        <div>
+                            <label for="textColor">Couleur du texte</label>
+                            <select id="textColor"></select>
+                        </div>
+
+                        <div>
+                            <label for="bgColor">Couleur du fond</label>
+                            <select id="bgColor"></select>
+                        </div>
+
+                        <div class="control-buttons">
+                            <button id="swapColors" type="button">
+                                Inverser
+                            </button>
+                            <button id="autoText" type="button">
+                                Texte optimal
+                            </button>
+                        </div>
+                    </div>
+
+                    <div
+                        id="previewText"
+                        class="contrast-preview"
+                        aria-live="polite"
+                    ></div>
+                    <div
+                        id="contrastResult"
+                        class="contrast-result"
+                        aria-live="polite"
+                    ></div>
+                </section>
+
+                <section class="card" aria-labelledby="export-title">
+                    <h2 id="export-title">Exports</h2>
+
+                    <div class="export-actions">
+                        <button id="copyCss" type="button">
+                            Copier les variables CSS
+                        </button>
+                        <button id="copyTailwind" type="button">
+                            Copier la config Tailwind
+                        </button>
+                        <button id="copyShare" type="button">
+                            Copier le lien de partage
+                        </button>
+                    </div>
+
+                    <div class="exports-grid">
+                        <div>
+                            <h3>Variables CSS</h3>
+                            <pre id="cssOutput"></pre>
+                        </div>
+
+                        <div>
+                            <h3>Tailwind CSS</h3>
+                            <pre id="tailwindOutput"></pre>
+                        </div>
+                    </div>
+                </section>
+            </section>
+        </main>
+
+        <footer class="site-footer">
+            <div class="container">
+                <p>PaletteProof — un outil conçu pour BS3 Digital.</p>
+            </div>
+        </footer>
+
+        <script src="app.js"></script>
+    </body>
+</html>
